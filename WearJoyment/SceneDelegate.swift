@@ -16,7 +16,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = ClothingViewController(dataManager: ClothingManager.shared)
+        let outfitsVC = OutfitsViewController(dataManager: OutfitManager.shared)
+        let navigationController = UINavigationController(rootViewController: outfitsVC) 
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 }

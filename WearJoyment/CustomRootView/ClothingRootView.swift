@@ -9,20 +9,22 @@ import UIKit
 
 final class ClothingRootView: UIView {
     
-    private var clothingCollectionView: UICollectionView! //проверь насколько удачно я назвала все свойства
+    private var clothingCollectionView: UICollectionView!
     private let reuseIdentifier = "clothingReuseIdentifier"
     private var items: [ItemModel] = []
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        //setupView()
+        setupView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(items: [ItemModel]) { //вот этот метод напомни для чего? чтобы модель передать в коллекцию?
+    // MARK: - Public Methods
+    func configure(items: [ItemModel]) {
         self.items = items
         clothingCollectionView.reloadData()
     }
@@ -31,14 +33,15 @@ final class ClothingRootView: UIView {
 // MARK: - Setup View
 private extension ClothingRootView {
     func setupView() {
-        backgroundColor = .white //это цвет всего экрана
+        backgroundColor = .white
         clothingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        clothingCollectionView.register(ClothingCustomCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        clothingCollectionView.backgroundColor = .blue //а это цвет самой коллекции
+        clothingCollectionView.register(ClothingCustomCell.self, forCellWithReuseIdentifier: ClothingCustomCell.reuseIdentifier)
+        clothingCollectionView.backgroundColor = .white
         clothingCollectionView.dataSource = self
         clothingCollectionView.delegate = self
         
         addSubview(clothingCollectionView)
+        configureCollectionView()
     }
 }
 
@@ -46,39 +49,37 @@ private extension ClothingRootView {
 private extension ClothingRootView {
     func createLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { sectionIndex, _ in
-                   if sectionIndex == 0 {
-                       return self.createSection(for: .top)
-                   } else {
-                       return self.createSection(for: .bottom)
-                   }
-               }
-           }
+            if sectionIndex == 0 {
+                return self.createSection(for: .top)
+            } else {
+                return self.createSection(for: .bottom)
+            }
+        }
+    }
+    
+    func createSection(for type: ItemType) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.5),
+            heightDimension: .fractionalHeight(1)
+        )
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.7),
+            heightDimension: .absolute(220)
+        )
+        
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitems: [item]
+        )
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 120, leading: 10, bottom: 5, trailing: 5)
+        section.orthogonalScrollingBehavior = .continuous
 
-           func createSection(for type: ItemType) -> NSCollectionLayoutSection {
-               let itemSize = NSCollectionLayoutSize(
-                   widthDimension: .fractionalWidth(0.5),
-                   heightDimension: .absolute(200)
-               )
-               
-               let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-               let groupSize = NSCollectionLayoutSize(
-                   widthDimension: .fractionalWidth(1),
-                   heightDimension: .absolute(220)
-               )
-               
-               let group = NSCollectionLayoutGroup.horizontal(
-                   layoutSize: groupSize,
-                   subitems: [item]
-               )
-               
-               group.interItemSpacing = .fixed(25)
-
-               let section = NSCollectionLayoutSection(group: group)
-               section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
-               
-               return section
-        //return UICollectionViewCompositionalLayout(section: section) было так
+        return section
     }
     
     func configureCollectionView() {
@@ -95,39 +96,36 @@ private extension ClothingRootView {
 
 // MARK: - CollectionViewDataSource
 extension ClothingRootView: UICollectionViewDataSource {
-    //количество секций
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-           return 2
-       }
-    
-    //количество элементов в секции
+        return 2
+    }
+   
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return section == 0
-                ? items.filter { $0.type == .top }.count
-                : items.filter { $0.type == .bottom }.count
-        }
+        return section == 0
+        ? items.filter { $0.type == .top }.count
+        : items.filter { $0.type == .bottom }.count
+    }
     
-    //ячейка для каждого элемента
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: ClothingCustomCell.reuseIdentifier,
-                for: indexPath
-            ) as? ClothingCustomCell else {
-                return UICollectionViewCell()
-            }
-
-            let filteredItems = indexPath.section == 0
-                ? items.filter { $0.type == .top }
-                : items.filter { $0.type == .bottom }
-
-            let item = filteredItems[indexPath.row]
-            cell.configure(with: item)
-            return cell
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: ClothingCustomCell.reuseIdentifier,
+            for: indexPath
+        ) as? ClothingCustomCell else {
+            return UICollectionViewCell()
+        }
+        
+        let filteredItems = indexPath.section == 0
+        ? items.filter { $0.type == .top }
+        : items.filter { $0.type == .bottom }
+        
+        let item = filteredItems[indexPath.row]
+        cell.configure(with: item)
+        return cell
     }
 }
 
-//MARK: - CollectionViewDelegate
-extension ClothingRootView: UICollectionViewDelegate { //нужен он вообще?
+// MARK: - CollectionViewDelegate
+extension ClothingRootView: UICollectionViewDelegate { //нужен дальше когда добавлю детальный экран
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Выбрана вещь: \(items[indexPath.row].name)")
     }

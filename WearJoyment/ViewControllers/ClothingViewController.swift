@@ -29,9 +29,9 @@ final class ClothingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Гардероб" // Название экрана
-        
-        let allItems = dataManager.getTops() + dataManager.getBottoms() 
+        title = "Гардероб"
+     
+        let allItems = dataManager.getTops() + dataManager.getBottoms()
             customRootView.configure(items: allItems)
     }
 

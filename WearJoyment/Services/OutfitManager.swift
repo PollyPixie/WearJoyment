@@ -16,12 +16,12 @@ final class OutfitManager: IOutfitManager {
 
     private var outfits: [OutfitModel] = [
         OutfitModel(
-            name: "Черная футболка + Голубые джинсы",
+            name: "Черная футболка и Голубые джинсы",
             top: ClothingManager.shared.findItem(by: 1) ?? defaultItem(.top),
             bottom: ClothingManager.shared.findItem(by: 3) ?? defaultItem(.bottom)
         ),
         OutfitModel(
-            name: "Голубая рубашка + Черная юбка",
+            name: "Голубая рубашка и Черная юбка",
             top: ClothingManager.shared.findItem(by: 2) ?? defaultItem(.top),
             bottom: ClothingManager.shared.findItem(by: 4) ?? defaultItem(.bottom)
         )

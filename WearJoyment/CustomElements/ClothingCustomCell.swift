@@ -8,6 +8,7 @@
 import UIKit
 
 class ClothingCustomCell: UICollectionViewCell {
+    
     static let reuseIdentifier = "ClothingCustomCell"
     
     private let imageView: UIImageView = {
@@ -25,6 +26,7 @@ class ClothingCustomCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -33,7 +35,14 @@ class ClothingCustomCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Public Methods
+    func configure(with item: ItemModel) {
+        imageView.image = UIImage(named: item.image)
+        nameLabel.text = item.name
+    }
 
+    // MARK: - Setup View
     private func setupView() {
         contentView.addSubview(imageView)
         contentView.addSubview(nameLabel)
@@ -49,10 +58,5 @@ class ClothingCustomCell: UICollectionViewCell {
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
-    }
-
-    func configure(with item: ItemModel) {
-        imageView.image = UIImage(named: item.image) // Картинка из Assets
-        nameLabel.text = item.name
     }
 }
