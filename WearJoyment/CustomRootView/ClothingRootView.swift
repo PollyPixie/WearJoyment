@@ -9,9 +9,11 @@ import UIKit
 
 final class ClothingRootView: UIView {
     
-    private var clothingCollectionView: UICollectionView!
-    private let reuseIdentifier = "clothingReuseIdentifier"
-    private var items: [ItemModel] = []
+    private var collectionView: UICollectionView!
+    private let reuseIdentifier = "ClothingCustomCell"
+    
+    private var topItems: [ItemModel] = []
+    private var bottomItems: [ItemModel] = []
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -24,50 +26,45 @@ final class ClothingRootView: UIView {
     }
     
     // MARK: - Public Methods
-    func configure(items: [ItemModel]) {
-        self.items = items
-        clothingCollectionView.reloadData()
+    func configure(topItems: [ItemModel], bottomItems: [ItemModel]) {
+        self.topItems = topItems
+        self.bottomItems = bottomItems
+        collectionView.reloadData()
     }
 }
 
 // MARK: - Setup View
 private extension ClothingRootView {
     func setupView() {
-        backgroundColor = .white
-        clothingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        clothingCollectionView.register(ClothingCustomCell.self, forCellWithReuseIdentifier: ClothingCustomCell.reuseIdentifier)
-        clothingCollectionView.backgroundColor = .white
-        clothingCollectionView.dataSource = self
-        clothingCollectionView.delegate = self
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        collectionView.register(ClothingCustomCell.self, forCellWithReuseIdentifier: ClothingCustomCell.reuseIdentifier)
+        collectionView.backgroundColor = UIColor(white: 0.97, alpha: 1)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.showsHorizontalScrollIndicator = false
+      
+        addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(clothingCollectionView)
-        configureCollectionView()
-    }
-}
-
-// MARK: - Setting Layout
-private extension ClothingRootView {
-    func createLayout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { sectionIndex, _ in
-            if sectionIndex == 0 {
-                return self.createSection(for: .top)
-            } else {
-                return self.createSection(for: .bottom)
-            }
-        }
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
     
-    func createSection(for type: ItemType) -> NSCollectionLayoutSection {
+    func createLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.5),
-            heightDimension: .fractionalHeight(1)
+            heightDimension: .absolute(200)
         )
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.7),
-            heightDimension: .absolute(220)
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(200)
         )
         
         let group = NSCollectionLayoutGroup.horizontal(
@@ -76,58 +73,45 @@ private extension ClothingRootView {
         )
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 120, leading: 10, bottom: 5, trailing: 5)
-        section.orthogonalScrollingBehavior = .continuous
-
-        return section
-    }
-    
-    func configureCollectionView() {
-        clothingCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        section.contentInsets = NSDirectionalEdgeInsets(top: 50, leading: 5, bottom: 50, trailing: 10)
         
-        NSLayoutConstraint.activate([
-            clothingCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            clothingCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            clothingCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            clothingCollectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
-        ])
+        section.orthogonalScrollingBehavior = .continuous // Добавляем горизонтальный скролл 
+        
+        return UICollectionViewCompositionalLayout(section: section)
     }
 }
 
-// MARK: - CollectionViewDataSource
+// MARK: - UICollectionViewDataSource
 extension ClothingRootView: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        2
     }
-   
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0
-        ? items.filter { $0.type == .top }.count
-        : items.filter { $0.type == .bottom }.count
+        section == 0 ? topItems.count : bottomItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: ClothingCustomCell.reuseIdentifier,
-            for: indexPath
-        ) as? ClothingCustomCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ClothingCustomCell.reuseIdentifier, for: indexPath) as? ClothingCustomCell else {
             return UICollectionViewCell()
         }
         
-        let filteredItems = indexPath.section == 0
-        ? items.filter { $0.type == .top }
-        : items.filter { $0.type == .bottom }
-        
-        let item = filteredItems[indexPath.row]
+        let item = indexPath.section == 0 ? topItems[indexPath.item] : bottomItems[indexPath.item]
         cell.configure(with: item)
         return cell
     }
 }
 
-// MARK: - CollectionViewDelegate
-extension ClothingRootView: UICollectionViewDelegate { //нужен дальше когда добавлю детальный экран
+// MARK: - UICollectionViewDelegate
+extension ClothingRootView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Выбрана вещь: \(items[indexPath.row].name)")
+        let item = indexPath.section == 0 ? topItems[indexPath.item] : bottomItems[indexPath.item]
+        print("Выбран: \(item.name)")
     }
 }
+
+
+
+
+
 

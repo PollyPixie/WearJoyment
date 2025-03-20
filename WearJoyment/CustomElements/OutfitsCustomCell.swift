@@ -28,7 +28,7 @@ final class OutfitsCustomCell: UITableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .thin)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

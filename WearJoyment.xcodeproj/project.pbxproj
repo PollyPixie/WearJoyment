@@ -22,6 +22,7 @@
 		73D357FC2D8ACF0300BA69A1 /* OutfitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D357FB2D8ACF0100BA69A1 /* OutfitsViewController.swift */; };
 		73D357FE2D8AD0F500BA69A1 /* OutfitDetailRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D357FD2D8AD0F300BA69A1 /* OutfitDetailRootView.swift */; };
 		73D358002D8AD35300BA69A1 /* OutfitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D357FF2D8AD35100BA69A1 /* OutfitDetailViewController.swift */; };
+		73D358032D8C1AB800BA69A1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D358022D8C1AB500BA69A1 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		73D357FB2D8ACF0100BA69A1 /* OutfitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitsViewController.swift; sourceTree = "<group>"; };
 		73D357FD2D8AD0F300BA69A1 /* OutfitDetailRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitDetailRootView.swift; sourceTree = "<group>"; };
 		73D357FF2D8AD35100BA69A1 /* OutfitDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitDetailViewController.swift; sourceTree = "<group>"; };
+		73D358022D8C1AB500BA69A1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				73D357EE2D89F0D500BA69A1 /* ClothingViewController.swift */,
 				73D357FB2D8ACF0100BA69A1 /* OutfitsViewController.swift */,
 				73D357FF2D8AD35100BA69A1 /* OutfitDetailViewController.swift */,
+				73D358022D8C1AB500BA69A1 /* TabBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				73D357FA2D8ACECC00BA69A1 /* OutfitsRootView.swift in Sources */,
 				73D357F82D8ACEA600BA69A1 /* OutfitsCustomCell.swift in Sources */,
 				73D357EF2D89F0D900BA69A1 /* ClothingViewController.swift in Sources */,
+				73D358032D8C1AB800BA69A1 /* TabBarController.swift in Sources */,
 				73D357EB2D88970000BA69A1 /* AppDelegate.swift in Sources */,
 				73D357EC2D88970000BA69A1 /* SceneDelegate.swift in Sources */,
 			);

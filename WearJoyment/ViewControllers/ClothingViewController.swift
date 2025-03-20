@@ -11,13 +11,13 @@ final class ClothingViewController: UIViewController {
     
     private let customRootView = ClothingRootView()
     private let dataManager: IClothingManager
-
+    
     // MARK: - Init
     init(dataManager: IClothingManager) {
         self.dataManager = dataManager
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -28,15 +28,11 @@ final class ClothingViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Гардероб"
-     
-        let allItems = dataManager.getTops() + dataManager.getBottoms()
-            customRootView.configure(items: allItems)
+            super.viewDidLoad()
+            
+            let topItems = dataManager.getTops()
+            let bottomItems = dataManager.getBottoms()
+            customRootView.configure(topItems: topItems, bottomItems: bottomItems)
+        }
     }
-
-    //override func viewWillAppear(_ animated: Bool) { //для таб бара
-        //super.viewWillAppear(animated)
-        //navigationController?.navigationBar.prefersLargeTitles = true}
-}
 

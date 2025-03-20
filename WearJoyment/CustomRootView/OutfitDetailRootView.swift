@@ -32,7 +32,7 @@ final class OutfitDetailRootView: UIView {
 // MARK: - Setup
 private extension OutfitDetailRootView {
     func setup() {
-        backgroundColor = UIColor(white: 0.85, alpha: 1)
+        backgroundColor = UIColor(white: 0.97, alpha: 1)
         addSubview(topImageView)
         addSubview(bottomImageView)
         
@@ -53,12 +53,12 @@ private extension OutfitDetailRootView {
             topImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             topImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             topImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            topImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4),
+            topImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.35),
             
             bottomImageView.topAnchor.constraint(equalTo: topImageView.bottomAnchor, constant: 0),
             bottomImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             bottomImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            bottomImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4),
+            bottomImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.35),
             bottomImageView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -20)
         ])
     }

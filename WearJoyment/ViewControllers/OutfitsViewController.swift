@@ -30,7 +30,7 @@ final class OutfitsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Аутфиты"
+        
         outfits = dataManager.fetchOutfits()
         customRootView.outfits = outfits
         
