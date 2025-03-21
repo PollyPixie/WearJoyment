@@ -36,7 +36,7 @@ final class OutfitsRootView: UIView {
     
     // MARK: - Setup View
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = ColorsConstants.white
         addSubview(tableView)
         
         NSLayoutConstraint.activate([

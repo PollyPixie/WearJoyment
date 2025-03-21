@@ -23,6 +23,7 @@
 		73D357FE2D8AD0F500BA69A1 /* OutfitDetailRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D357FD2D8AD0F300BA69A1 /* OutfitDetailRootView.swift */; };
 		73D358002D8AD35300BA69A1 /* OutfitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D357FF2D8AD35100BA69A1 /* OutfitDetailViewController.swift */; };
 		73D358032D8C1AB800BA69A1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D358022D8C1AB500BA69A1 /* TabBarController.swift */; };
+		73D358052D8D975700BA69A1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D358042D8D974900BA69A1 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		73D357FD2D8AD0F300BA69A1 /* OutfitDetailRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitDetailRootView.swift; sourceTree = "<group>"; };
 		73D357FF2D8AD35100BA69A1 /* OutfitDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitDetailViewController.swift; sourceTree = "<group>"; };
 		73D358022D8C1AB500BA69A1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		73D358042D8D974900BA69A1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 		73D357F22D89FB3100BA69A1 /* CustomElements */ = {
 			isa = PBXGroup;
 			children = (
+				73D358042D8D974900BA69A1 /* Constants.swift */,
 				73D357F42D89FB6100BA69A1 /* ClothingCustomCell.swift */,
 				73D357F72D8ACEA300BA69A1 /* OutfitsCustomCell.swift */,
 			);
@@ -215,6 +218,7 @@
 				73D357FE2D8AD0F500BA69A1 /* OutfitDetailRootView.swift in Sources */,
 				73D357F52D89FEC400BA69A1 /* ClothingCustomCell.swift in Sources */,
 				73D358002D8AD35300BA69A1 /* OutfitDetailViewController.swift in Sources */,
+				73D358052D8D975700BA69A1 /* Constants.swift in Sources */,
 				73D357E82D88970000BA69A1 /* ClothingManager.swift in Sources */,
 				73D357FC2D8ACF0300BA69A1 /* OutfitsViewController.swift in Sources */,
 				73D357E92D88970000BA69A1 /* OutfitManager.swift in Sources */,

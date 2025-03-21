@@ -38,7 +38,7 @@ private extension ClothingRootView {
     func setupView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.register(ClothingCustomCell.self, forCellWithReuseIdentifier: ClothingCustomCell.reuseIdentifier)
-        collectionView.backgroundColor = UIColor(white: 0.97, alpha: 1)
+        collectionView.backgroundColor = ColorsConstants.white
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false

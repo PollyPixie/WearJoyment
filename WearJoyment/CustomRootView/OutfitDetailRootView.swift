@@ -32,7 +32,7 @@ final class OutfitDetailRootView: UIView {
 // MARK: - Setup
 private extension OutfitDetailRootView {
     func setup() {
-        backgroundColor = UIColor(white: 0.97, alpha: 1)
+        backgroundColor = ColorsConstants.white
         addSubview(topImageView)
         addSubview(bottomImageView)
         

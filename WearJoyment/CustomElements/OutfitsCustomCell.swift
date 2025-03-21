@@ -13,11 +13,11 @@ final class OutfitsCustomCell: UITableViewCell {
     
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = ColorsConstants.white
         view.layer.cornerRadius = 12
         view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.lightGray.cgColor
-        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.borderColor = ColorsConstants.darkGray.cgColor
+        view.layer.shadowColor = ColorsConstants.darkGray.cgColor
         view.layer.shadowOpacity = 0.1
         view.layer.shadowOffset = CGSize(width: 2, height: 2)
         view.layer.shadowRadius = 4
@@ -30,6 +30,7 @@ final class OutfitsCustomCell: UITableViewCell {
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 16, weight: .thin)
         label.numberOfLines = 0
+        label.textColor = ColorsConstants.darkGray 
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -51,7 +52,7 @@ final class OutfitsCustomCell: UITableViewCell {
     
     // MARK: - Setup View
     private func setupView() {
-        contentView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        contentView.backgroundColor = ColorsConstants.darkBlue
         contentView.addSubview(containerView)
         containerView.addSubview(nameLabel)
         

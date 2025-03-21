@@ -30,9 +30,6 @@ enum TabBarItem {
 
 // MARK: - TabBarController
 final class TabBarController: UITabBarController {
-    //private let dataSource: [TabBarItem] = [
-       // .clothingVS, .outfitVS
-    //] //точно нужно?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +45,9 @@ private extension TabBarController {
         }
         setViewControllers(controllers, animated: true)
         
-        tabBar.tintColor = .black // Цвет активной вкладки (иконка + текст)
-        tabBar.unselectedItemTintColor = .darkGray // Цвет неактивных вкладок
-        tabBar.backgroundColor = UIColor(white: 0.85, alpha: 1) // Фон нижнего TabBar (но есть слой сверху можно убрать)
+        tabBar.tintColor = ColorsConstants.darkGray
+        tabBar.unselectedItemTintColor = ColorsConstants.darkBlue
+        tabBar.backgroundColor = ColorsConstants.lightBlue
     }
     
     func getTabBarController(_ item: TabBarItem) -> UINavigationController {
@@ -58,16 +55,21 @@ private extension TabBarController {
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(white: 0.85, alpha: 1) // Фон NavigationBar (верхняя панель)
+        appearance.backgroundColor = ColorsConstants.lightBlue
         
         appearance.titleTextAttributes = [
-            .foregroundColor: UIColor(.black),
+            .foregroundColor: ColorsConstants.darkGray,
             .font: UIFont.systemFont(ofSize: 18, weight: .thin),
             .kern: 1.5
         ]
         
+        appearance.buttonAppearance.normal.titleTextAttributes = [
+            .foregroundColor: ColorsConstants.darkBlue
+           ]
+        
         navController.navigationBar.standardAppearance = appearance
         navController.navigationBar.scrollEdgeAppearance = appearance
+        navController.navigationBar.tintColor = ColorsConstants.darkBlue
         
         navController.tabBarItem.title = item.title
         navController.tabBarItem.image = item.icon
