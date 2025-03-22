@@ -17,10 +17,10 @@ final class ClothingManager: IClothingManager {
     static let shared = ClothingManager()
     
     private let items: [ItemModel] = [
-        ItemModel(id: 1, name: "Черная футболка", image: "черная футболка", type: .top),
-        ItemModel(id: 2, name: "Голубая рубашка", image: "голубая рубашка", type: .top),
-        ItemModel(id: 3, name: "Голубые джинсы", image: "голубые джинсы", type: .bottom),
-        ItemModel(id: 4, name: "Черная юбка", image: "черная юбка", type: .bottom)
+        ItemModel(id: 1, name: "Черная юбка", image: "bottomBlackSkirt", type: .bottom),
+        ItemModel(id: 2, name: "Бежевая юбка", image: "bottomBeigeSkirt", type: .bottom),
+        ItemModel(id: 3, name: "Голубые шорты", image: "bottomLightBlueDenimShorts", type: .bottom),
+        ItemModel(id: 4, name: "Голубые джинсы", image: "bottomBlueJeans", type: .bottom)
     ]
     
     func getTops() -> [ItemModel] {
